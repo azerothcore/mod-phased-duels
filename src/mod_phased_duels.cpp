@@ -12,6 +12,7 @@ http://emudevs.com/showthread.php/2282-phase-out-dueling-error?p=15483&viewfull=
 */
 #include "Config.h"
 #include "Object.h"
+#include "Pet.h"
 
 class PhasedDueling : public PlayerScript
 {
@@ -112,6 +113,31 @@ public:
 
                 firstplayer->SetPower(firstplayer->getPowerType(), firstplayer->GetMaxPower(firstplayer->getPowerType()));
                 secondplayer->SetPower(secondplayer->getPowerType(), secondplayer->GetMaxPower(secondplayer->getPowerType()));
+            }
+
+            if (sConfigMgr->GetBoolDefault("ReviveOrRestorPetHealth.Enable", true))
+            {
+                Pet* pet1 = firstplayer->GetPet();
+                Pet* pet2 = secondplayer->GetPet();
+
+                if (!pet1 || !pet2)
+                    return;
+
+                if (!pet1->IsAlive()  || !pet2->IsAlive())
+                {
+                    if (firstplayer->getClass() == CLASS_HUNTER || secondplayer->getClass() == CLASS_HUNTER)
+                    {
+                        pet1->SetPower(POWER_HAPPINESS, pet1->GetMaxPower(POWER_HAPPINESS));
+                        pet2->SetPower(POWER_HAPPINESS, pet2->GetMaxPower(POWER_HAPPINESS));
+                    }
+                    pet1->setDeathState(ALIVE);
+                    pet2->setDeathState(ALIVE);
+                }
+
+                pet1->SetHealth(pet1->GetMaxHealth());
+                pet2->SetHealth(pet2->GetMaxHealth());
+
+                
             }
         }
     }
