@@ -21,7 +21,7 @@ public:
 
     void OnLogin(Player* pPlayer)
     {
-        if (sConfigMgr->GetBoolDefault("PhasedDuels.Enable", true))
+        if (sConfigMgr->GetBoolDefault("PhasedDuelsAnnounce.Enable", true))
         {
             ChatHandler(pPlayer->GetSession()).SendSysMessage("This server is running the |cff4CFF00PhasedDuels |rmodule.");
         }
