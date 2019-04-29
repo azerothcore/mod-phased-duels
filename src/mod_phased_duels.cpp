@@ -10,7 +10,7 @@ http://emudevs.com/showthread.php/3413-Phased-duel-(pets-work)?p=24109
 Original source:
 http://emudevs.com/showthread.php/2282-phase-out-dueling-error?p=15483&viewfull=1#post15483
 */
-#include Configuration/Config.h"
+#include "Configuration/Config.h"
 #include "Object.h"
 #include "Pet.h"
 #include "ScriptMgr.h"
