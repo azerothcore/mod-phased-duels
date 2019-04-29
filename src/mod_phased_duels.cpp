@@ -21,7 +21,7 @@ class PhasedDueling : public PlayerScript
 public:
     PhasedDueling(): PlayerScript("PhasedDueling") {}
 
-    void OnLogin(Player* pPlayer)
+    void OnLogin(Player* pPlayer) override
     {
         if (sConfigMgr->GetBoolDefault("PhasedDuelsAnnounce.Enable", true))
         {
