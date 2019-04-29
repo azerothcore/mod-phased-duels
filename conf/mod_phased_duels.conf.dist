@@ -8,6 +8,10 @@
 
 PhasedDuels.Enable = 1
 
+# Announce Module (1: true | 0: false)
+
+PhasedDuelsAnnounce.Enable = 1
+
 ###################################################################################################
 #
 # SetMaxHP.Enable 
