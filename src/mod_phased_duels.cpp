@@ -51,8 +51,8 @@ public:
 
             // Get players from 100 yard radius ( duel radius is 40-50 yd )
             std::list<Player*> playerList;
-            acore::AnyPlayerInObjectRangeCheck checker(go, 100.0f);
-            acore::PlayerListSearcher<acore::AnyPlayerInObjectRangeCheck> searcher(go, playerList, checker);
+            Acore::AnyPlayerInObjectRangeCheck checker(go, 100.0f);
+            Acore::PlayerListSearcher<Acore::AnyPlayerInObjectRangeCheck> searcher(go, playerList, checker);
             go->VisitNearbyWorldObject(100.0f, searcher);
 
             // insert players' phases to used phases, ignore GMs
