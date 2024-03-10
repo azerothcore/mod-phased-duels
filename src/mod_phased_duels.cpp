@@ -53,7 +53,7 @@ public:
             std::list<Player*> playerList;
             Acore::AnyPlayerInObjectRangeCheck checker(go, 100.0f);
             Acore::PlayerListSearcher<Acore::AnyPlayerInObjectRangeCheck> searcher(go, playerList, checker);
-            go->VisitNearbyWorldObject(100.0f, searcher);
+            Cell::VisitWorldObjects(go, searcher, 100.0f);
 
             // insert players' phases to used phases, ignore GMs
             uint32 usedPhases = 0;
