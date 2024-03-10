@@ -30,7 +30,7 @@ public:
 
     void OnLogin(Player* pPlayer) override
     {
-        if (sConfigMgr->GetBoolDefault("PhasedDuelsAnnounce.Enable", true))
+        if (sConfigMgr->GetOption<bool>("PhasedDuelsAnnounce.Enable", true))
         {
             ChatHandler(pPlayer->GetSession()).SendSysMessage("This server is running the |cff4CFF00PhasedDuels |rmodule.");
         }
@@ -38,7 +38,7 @@ public:
 
     void OnDuelStart(Player* firstplayer, Player* secondplayer) override
     {
-        if (sConfigMgr->GetBoolDefault("PhasedDuels.Enable", true))
+        if (sConfigMgr->GetOption<bool>("PhasedDuels.Enable", true))
         {
             Map* map = firstplayer->GetMap();
             if (map->IsDungeon())
@@ -88,7 +88,7 @@ public:
     // Restore phases
     void OnDuelEnd(Player* firstplayer, Player* secondplayer, DuelCompleteType /* type */) override // unusued param type
     {
-        if (sConfigMgr->GetBoolDefault("PhasedDueling.Enable", true))
+        if (sConfigMgr->GetOption<bool>("PhasedDueling.Enable", true))
         {
             // Phase players, dont update visibility yet
             firstplayer->SetPhaseMask(GetNormalPhase(firstplayer), false);
@@ -97,21 +97,21 @@ public:
             firstplayer->UpdateObjectVisibility();
             secondplayer->UpdateObjectVisibility();
 
-            if (sConfigMgr->GetBoolDefault("SetMaxHP.Enable", true))
+            if (sConfigMgr->GetOption<bool>("SetMaxHP.Enable", true))
             {
                 firstplayer->SetHealth(firstplayer->GetMaxHealth());
                 secondplayer->SetHealth(secondplayer->GetMaxHealth());
             }
 
-            if (sConfigMgr->GetBoolDefault("ResetCoolDowns.Enable", true))
+            if (sConfigMgr->GetOption<bool>("ResetCoolDowns.Enable", true))
             {
                 firstplayer->RemoveAllSpellCooldown();
                 secondplayer->RemoveAllSpellCooldown();
             }
 
-            if (sConfigMgr->GetBoolDefault("RestorePower.Enable", true))
+            if (sConfigMgr->GetOption<bool>("RestorePower.Enable", true))
             {
-                if (!sConfigMgr->GetBoolDefault("RetorePowerForRogueOrWarrior.Enable", true))
+                if (!sConfigMgr->GetOption<bool>("RetorePowerForRogueOrWarrior.Enable", true))
                 {
                     if (firstplayer->getClass() == CLASS_ROGUE || firstplayer->getClass() == CLASS_WARRIOR)
                         return;
@@ -124,7 +124,7 @@ public:
                 secondplayer->SetPower(secondplayer->getPowerType(), secondplayer->GetMaxPower(secondplayer->getPowerType()));
             }
 
-            if (sConfigMgr->GetBoolDefault("ReviveOrRestorPetHealth.Enable", true))
+            if (sConfigMgr->GetOption<bool>("ReviveOrRestorPetHealth.Enable", true))
             {
                 Pet* pet1 = firstplayer->GetPet();
                 Pet* pet2 = secondplayer->GetPet();
