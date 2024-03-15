@@ -28,11 +28,11 @@ class PhasedDueling : public PlayerScript
 public:
     PhasedDueling(): PlayerScript("PhasedDueling") {}
 
-    void OnLogin(Player* pPlayer) override
+    void OnLogin(Player* player) override
     {
         if (sConfigMgr->GetOption<bool>("PhasedDuelsAnnounce.Enable", true))
         {
-            ChatHandler(pPlayer->GetSession()).SendSysMessage("This server is running the |cff4CFF00PhasedDuels |rmodule.");
+            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00PhasedDuels |rmodule.");
         }
     }
 
@@ -86,7 +86,7 @@ public:
     }
 
     // Restore phases
-    void OnDuelEnd(Player* firstplayer, Player* secondplayer, DuelCompleteType /* type */) override // unusued param type
+    void OnDuelEnd(Player* firstplayer, Player* secondplayer, DuelCompleteType /*type*/) override // unusued param type
     {
         if (sConfigMgr->GetOption<bool>("PhasedDueling.Enable", true))
         {
@@ -139,14 +139,12 @@ public:
                         pet1->SetPower(POWER_HAPPINESS, pet1->GetMaxPower(POWER_HAPPINESS));
                         pet2->SetPower(POWER_HAPPINESS, pet2->GetMaxPower(POWER_HAPPINESS));
                     }
-                    pet1->setDeathState(ALIVE);
-                    pet2->setDeathState(ALIVE);
+                    pet1->setDeathState(DeathState::Alive);
+                    pet2->setDeathState(DeathState::Alive);
                 }
 
                 pet1->SetHealth(pet1->GetMaxHealth());
                 pet2->SetHealth(pet2->GetMaxHealth());
-
-
             }
         }
     }
