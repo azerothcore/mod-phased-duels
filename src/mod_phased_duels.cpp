@@ -1,4 +1,5 @@
 #include "mod_phased_duels.h"
+#include "SpellHistory.h"
 
 uint32 PhasedDueling::getNormalPhase(Player* player) const
 {
@@ -91,8 +92,8 @@ void PhasedDueling::OnPlayerDuelEnd(Player* firstplayer, Player* secondplayer, D
 
         if (sConfigMgr->GetOption<bool>("ResetCoolDowns.Enable", true))
         {
-            firstplayer->RemoveAllSpellCooldown();
-            secondplayer->RemoveAllSpellCooldown();
+            firstplayer->GetSpellHistory()->ResetAllCooldowns();
+            secondplayer->GetSpellHistory()->ResetAllCooldowns();
         }
 
         if (sConfigMgr->GetOption<bool>("RestorePower.Enable", true))
